@@ -1,0 +1,60 @@
+=== Exemplo 1 ===
+Sequencial
+Objetos: 3
+Tempo: 0.000006 segundos
+Paralelo: 2 threads
+Objetos: 3
+Threads: 2
+Tempo: 0.000165 segundos
+Paralelo: 4 threads
+Objetos: 3
+Threads: 4
+Tempo: 0.000699 segundos
+=== Exemplo 2 ===
+Sequencial
+Objetos: 4
+Tempo: 0.000008 segundos
+Paralelo: 2 threads
+Objetos: 4
+Threads: 2
+Tempo: 0.000302 segundos
+Paralelo: 4 threads
+Objetos: 4
+Threads: 4
+Tempo: 0.001260 segundos
+=== Exemplo 3 ===
+Sequencial
+Objetos: 5
+Tempo: 0.000007 segundos
+Paralelo: 2 threads
+Objetos: 5
+Threads: 2
+Tempo: 0.000353 segundos
+Paralelo: 4 threads
+Objetos: 5
+Threads: 4
+Tempo: 0.000431 segundos
+=== Exemplo 4 ===
+Sequencial
+Objetos: 6
+Tempo: 0.000010 segundos
+Paralelo: 2 threads
+Objetos: 6
+Threads: 2
+Tempo: 0.000301 segundos
+Paralelo: 4 threads
+Objetos: 6
+Threads: 4
+Tempo: 0.000750 segundos
+=== Exemplo 5 ===
+Sequencial
+Objetos: 7
+Tempo: 0.000010 segundos
+Paralelo: 2 threads
+Objetos: 7
+Threads: 2
+Tempo: 0.000348 segundos
+Paralelo: 4 threads
+Objetos: 7
+Threads: 4
+Tempo: 0.001112 segundos

@@ -1,0 +1,5 @@
+sequencial
+paralelo
+*.bak
+__MACOSX/
+.DS_Store

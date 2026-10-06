@@ -1,0 +1,120 @@
+=== Repeticao 1 ===
+Sequencial
+Objetos: 1
+Tempo: 0.409107 segundos
+Paralelo: 2 threads
+Objetos: 1
+Threads: 2
+Tempo: 0.268943 segundos
+Paralelo: 4 threads
+Objetos: 1
+Threads: 4
+Tempo: 0.234347 segundos
+=== Repeticao 2 ===
+Sequencial
+Objetos: 1
+Tempo: 0.305913 segundos
+Paralelo: 2 threads
+Objetos: 1
+Threads: 2
+Tempo: 0.271737 segundos
+Paralelo: 4 threads
+Objetos: 1
+Threads: 4
+Tempo: 0.226024 segundos
+=== Repeticao 3 ===
+Sequencial
+Objetos: 1
+Tempo: 0.339355 segundos
+Paralelo: 2 threads
+Objetos: 1
+Threads: 2
+Tempo: 0.296570 segundos
+Paralelo: 4 threads
+Objetos: 1
+Threads: 4
+Tempo: 0.255736 segundos
+=== Repeticao 4 ===
+Sequencial
+Objetos: 1
+Tempo: 0.292423 segundos
+Paralelo: 2 threads
+Objetos: 1
+Threads: 2
+Tempo: 0.289404 segundos
+Paralelo: 4 threads
+Objetos: 1
+Threads: 4
+Tempo: 0.245971 segundos
+=== Repeticao 5 ===
+Sequencial
+Objetos: 1
+Tempo: 0.316795 segundos
+Paralelo: 2 threads
+Objetos: 1
+Threads: 2
+Tempo: 0.285988 segundos
+Paralelo: 4 threads
+Objetos: 1
+Threads: 4
+Tempo: 0.236698 segundos
+=== Repeticao 6 ===
+Sequencial
+Objetos: 1
+Tempo: 0.298301 segundos
+Paralelo: 2 threads
+Objetos: 1
+Threads: 2
+Tempo: 0.295475 segundos
+Paralelo: 4 threads
+Objetos: 1
+Threads: 4
+Tempo: 0.228280 segundos
+=== Repeticao 7 ===
+Sequencial
+Objetos: 1
+Tempo: 0.289301 segundos
+Paralelo: 2 threads
+Objetos: 1
+Threads: 2
+Tempo: 0.278705 segundos
+Paralelo: 4 threads
+Objetos: 1
+Threads: 4
+Tempo: 0.237554 segundos
+=== Repeticao 8 ===
+Sequencial
+Objetos: 1
+Tempo: 0.289988 segundos
+Paralelo: 2 threads
+Objetos: 1
+Threads: 2
+Tempo: 0.289765 segundos
+Paralelo: 4 threads
+Objetos: 1
+Threads: 4
+Tempo: 0.245191 segundos
+=== Repeticao 9 ===
+Sequencial
+Objetos: 1
+Tempo: 0.307087 segundos
+Paralelo: 2 threads
+Objetos: 1
+Threads: 2
+Tempo: 0.321327 segundos
+Paralelo: 4 threads
+Objetos: 1
+Threads: 4
+Tempo: 0.242586 segundos
+=== Repeticao 10 ===
+Sequencial
+Objetos: 1
+Tempo: 0.324060 segundos
+Paralelo: 2 threads
+Objetos: 1
+Threads: 2
+Tempo: 0.288562 segundos
+Paralelo: 4 threads
+Objetos: 1
+Threads: 4
+Tempo: 0.231932 segundos
