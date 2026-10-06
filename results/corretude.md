@@ -40,3 +40,19 @@ Após a alteração da medição de tempo para `clock_gettime(CLOCK_MONOTONIC)`,
 Estes resultados comprovam as contagens nas matrizes e configurações testadas. Não demonstram correção para todas as entradas possíveis nem substituem testes adicionais de limites e tratamento de erros.
 
 Os tempos destas matrizes pequenas não são usados aqui para calcular speedup. A avaliação de desempenho requer uma matriz maior e medições repetidas, que ainda estão pendentes.
+
+## Teste adicional: matriz de uma linha
+
+A versão paralela divide as colunas quando a matriz tem somente uma linha, preservando pelo menos duas threads com regiões não vazias. Objetos que atravessam as fronteiras entre essas faixas são consolidados por suas células adjacentes.
+
+Foi adicionado `tests/uma-linha.txt`, com dimensões 1 × 8 e valores `1 1 0 1 1 1 0 1`. A contagem esperada é 3 objetos.
+
+```bash
+./sequencial < tests/uma-linha.txt
+./paralelo 2 < tests/uma-linha.txt
+./paralelo 4 < tests/uma-linha.txt
+```
+
+Na verificação da correção, foram testadas todas as combinações binárias com uma linha e de 2 a 8 colunas, solicitando 2 e 4 threads: 1016 execuções, todas com contagens corretas e pelo menos duas trabalhadoras. As cinco matrizes obrigatórias e a matriz grande também passaram novamente com 2 e 4 threads.
+
+Uma matriz 1 × 1 é rejeitada pela versão paralela com mensagem de erro, pois não permite distribuir células entre duas trabalhadoras. Esse caso pode ser executado pela versão sequencial.

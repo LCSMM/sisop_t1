@@ -14,6 +14,8 @@ typedef struct {
     int id;
     int inicio;
     int fim;
+    int inicio_coluna;
+    int fim_coluna;
     int linhas;
     int colunas;
     const int *matriz;
@@ -37,7 +39,8 @@ static void flood_fill_local(DadosThread *dados,
     int dl;
     int dc;
 
-    capacidade = (dados->fim - dados->inicio) * dados->colunas;
+    capacidade = (dados->fim - dados->inicio)
+               * (dados->fim_coluna - dados->inicio_coluna);
 
     pilha = (Celula *) malloc(
         (size_t) capacidade * sizeof(Celula)
@@ -78,12 +81,12 @@ static void flood_fill_local(DadosThread *dados,
 
                 /*
                  * A thread somente percorre sua propria
-                 * faixa de linhas.
+                 * regiao de linhas e colunas.
                  */
                 if (nl < dados->inicio ||
                     nl >= dados->fim ||
-                    nc < 0 ||
-                    nc >= dados->colunas)
+                    nc < dados->inicio_coluna ||
+                    nc >= dados->fim_coluna)
                     continue;
 
                 pos = indice(nl, nc, dados->colunas);
@@ -113,7 +116,7 @@ static void *processar_faixa(void *arg)
     dados = (DadosThread *) arg;
 
     for (l = dados->inicio; l < dados->fim; l++) {
-        for (c = 0; c < dados->colunas; c++) {
+        for (c = dados->inicio_coluna; c < dados->fim_coluna; c++) {
             int pos;
 
             pos = indice(l, c, dados->colunas);
@@ -231,6 +234,7 @@ int main(int argc, char *argv[])
     int i;
     int t;
     int linhas_base;
+    int unidades;
     int resto;
     int atual;
     int total_rotulos;
@@ -264,8 +268,15 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    if (numero_threads > linhas)
-        numero_threads = linhas;
+    /* Uma linha e dividida por colunas para manter trabalho real. */
+    unidades = (linhas == 1) ? colunas : linhas;
+    if (unidades < 2) {
+        fprintf(stderr,
+                "A versao paralela requer pelo menos duas celulas.\n");
+        return EXIT_FAILURE;
+    }
+    if (numero_threads > unidades)
+        numero_threads = unidades;
 
     matriz = (int *) malloc(
         (size_t) linhas * colunas * sizeof(int)
@@ -322,12 +333,13 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    linhas_base = linhas / numero_threads;
-    resto = linhas % numero_threads;
+    linhas_base = unidades / numero_threads;
+    resto = unidades % numero_threads;
     atual = 0;
 
     /*
-     * Cada thread recebe uma faixa exclusiva.
+     * Cada thread recebe uma faixa exclusiva de linhas ou,
+     * para uma unica linha, de colunas.
      *
      * Os rotulos tambem possuem intervalos exclusivos.
      * O valor (t * linhas * colunas + 1) evita que duas
@@ -342,8 +354,10 @@ int main(int argc, char *argv[])
             quantidade++;
 
         dados[t].id = t;
-        dados[t].inicio = atual;
-        dados[t].fim = atual + quantidade;
+        dados[t].inicio = (linhas == 1) ? 0 : atual;
+        dados[t].fim = (linhas == 1) ? 1 : atual + quantidade;
+        dados[t].inicio_coluna = (linhas == 1) ? atual : 0;
+        dados[t].fim_coluna = (linhas == 1) ? atual + quantidade : colunas;
         dados[t].linhas = linhas;
         dados[t].colunas = colunas;
         dados[t].matriz = matriz;
@@ -413,6 +427,17 @@ int main(int argc, char *argv[])
         int linha_superior;
         int linha_inferior;
         int c;
+
+        if (linhas == 1) {
+            int esquerda;
+            int direita;
+
+            esquerda = dados[t].fim_coluna - 1;
+            direita = dados[t].fim_coluna;
+            if (matriz[esquerda] == 1 && matriz[direita] == 1)
+                unir(pai, rotulos[esquerda], rotulos[direita]);
+            continue;
+        }
 
         linha_superior = dados[t].fim - 1;
         linha_inferior = dados[t].fim;

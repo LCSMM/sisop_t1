@@ -76,7 +76,7 @@ Os programas leem a entrada padrão. O operador `<` fornece o conteúdo de um ar
 ./paralelo 4 < tests/exemplo1.txt
 ```
 
-O argumento da versão paralela informa a quantidade solicitada de threads. A entrada exige argumento de pelo menos 2; se a quantidade solicitada exceder o número de linhas, o programa a reduz ao número de linhas. Para executar com pelo menos duas trabalhadoras, a matriz deve ter pelo menos duas linhas.
+O argumento da versão paralela informa a quantidade solicitada de threads, que deve ser pelo menos 2. Para matrizes com duas ou mais linhas, a quantidade efetiva é limitada pelo número de linhas. Matrizes de uma linha são divididas em faixas de colunas, com a quantidade limitada pelo número de colunas. Uma matriz 1 × 1 é rejeitada pela versão paralela, pois não permite distribuir células entre duas trabalhadoras; pode ser processada pela versão sequencial.
 
 A saída informa a quantidade de objetos e o tempo medido em segundos. A versão paralela também informa a quantidade efetiva de threads.
 
@@ -90,7 +90,7 @@ O flood fill examina os oito vizinhos de cada célula. A marcação ocorre antes
 
 ### Divisão e rotulação local
 
-A matriz é dividida em faixas contíguas de linhas. A divisão usa o quociente entre linhas e threads; as linhas restantes são distribuídas entre as primeiras threads. Isso equilibra o número de linhas, embora não garanta o mesmo custo de processamento em matrizes com distribuição irregular de objetos.
+A matriz é dividida em faixas contíguas de linhas. Quando há somente uma linha, a divisão usa faixas contíguas de colunas. A divisão usa o quociente entre linhas e threads; as linhas restantes são distribuídas entre as primeiras threads. Na exceção de uma linha, o mesmo cálculo distribui as colunas. Isso equilibra o número de linhas, embora não garanta o mesmo custo de processamento em matrizes com distribuição irregular de objetos.
 
 Cada thread percorre sua faixa e aplica flood fill sem sair dela. O vetor de rótulos também registra quais células já foram visitadas. A thread `t` inicia seus identificadores em `t * linhas * colunas + 1`, reservando intervalos exclusivos de rótulos.
 
@@ -106,7 +106,7 @@ Se a criação de uma thread falhar, o programa aguarda as threads já criadas a
 
 Um objeto pode ser dividido em componentes locais ao atravessar faixas. Por isso, somar contagens locais não é suficiente.
 
-Após a rotulação, a thread principal usa Union-Find para representar equivalências entre rótulos. Para cada fronteira entre faixas, compara a última linha da faixa superior com a primeira da seguinte, verificando conexões verticais, diagonais à esquerda e diagonais à direita. As conexões horizontais ficam dentro de cada faixa e já são tratadas pelo flood fill local.
+Após a rotulação, a thread principal usa Union-Find para representar equivalências entre rótulos. Para cada fronteira entre faixas, compara a última linha da faixa superior com a primeira da seguinte, verificando conexões verticais, diagonais à esquerda e diagonais à direita. As conexões horizontais ficam dentro de cada faixa de linhas e já são tratadas pelo flood fill local. Na exceção de uma única linha, são verificadas as células adjacentes nas fronteiras entre faixas de colunas.
 
 Uniões sucessivas também consolidam objetos que atravessam várias faixas. Uma varredura final conta as raízes distintas dos rótulos presentes na matriz. A decomposição não usa blocos em duas dimensões; as conexões diagonais entre regiões são tratadas nas fronteiras das faixas.
 
@@ -151,7 +151,6 @@ Os resultados valem para a matriz e o ambiente testados. A análise detalhada ex
 - Os valores lidos ainda não são rejeitados quando diferem de 0 e 1; devem ser fornecidas matrizes binárias válidas.
 - A conversão do argumento de threads usa `atoi`, sem validação completa.
 - Não há proteção completa contra overflow nos produtos usados para dimensões, índices e rótulos.
-- Uma matriz de uma linha reduz a execução paralela a uma thread.
 - O Union-Find reserva espaço proporcional ao número de threads multiplicado pelo número de células, podendo consumir muita memória.
 - A pilha é alocada novamente para cada componente.
 - A validação apresentada cobre os testes registrados; não comprova todas as entradas possíveis.
