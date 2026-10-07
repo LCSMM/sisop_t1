@@ -161,7 +161,6 @@ int main(void)
         }
     }
 
-    /* Mede tempo decorrido, excluindo a leitura da entrada. */
     if (clock_gettime(CLOCK_MONOTONIC, &inicio) != 0) {
         perror("Erro ao iniciar medicao de tempo");
         free(matriz);

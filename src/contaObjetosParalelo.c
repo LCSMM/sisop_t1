@@ -203,7 +203,6 @@ static int contar_resultado(int *rotulos,
     return quantidade;
 }
 
-/* Aguarda todas as threads criadas antes de liberar dados compartilhados. */
 static void aguardar_threads(pthread_t *threads, int quantidade)
 {
     int t;
@@ -211,11 +210,6 @@ static void aguardar_threads(pthread_t *threads, int quantidade)
     for (t = 0; t < quantidade; t++) {
         if (pthread_join(threads[t], NULL) != 0) {
             fprintf(stderr, "Erro ao aguardar thread %d.\n", t);
-            /*
-             * Sem confirmar o termino, nao e seguro liberar os dados.
-             * exit encerra o processo inteiro, incluindo suas threads;
-             * o sistema operacional recupera os recursos do processo.
-             */
             exit(EXIT_FAILURE);
         }
     }
@@ -268,7 +262,6 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    /* Uma linha e dividida por colunas para manter trabalho real. */
     unidades = (linhas == 1) ? colunas : linhas;
     if (unidades < 2) {
         fprintf(stderr,
@@ -323,7 +316,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    /* Mede tempo decorrido, excluindo a leitura da entrada. */
     if (clock_gettime(CLOCK_MONOTONIC, &inicio) != 0) {
         perror("Erro ao iniciar medicao de tempo");
         free(matriz);
