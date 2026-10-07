@@ -166,8 +166,3 @@ Os resultados valem para a matriz e o ambiente testados. A análise detalhada ex
 - APIs utilizadas: biblioteca padrão C e interfaces POSIX Pthreads e `clock_gettime`.
 - Ferramentas utilizadas: compilador `cc`, `make`, Ubuntu/WSL e Python 3 para gerar a matriz grande.
 - Houve auxílio de ChatGPT/Codex na revisão do projeto, correção da medição de tempo, organização dos testes, cálculo de resultados e elaboração da documentação. A revisão e o domínio do trabalho são responsabilidade dos integrantes.
-
-## Pendências antes da entrega
-
-- Revisar as limitações técnicas descritas acima.
-- Entregar o endereço do repositório pelo Moodle, conforme orientação da disciplina.
