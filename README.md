@@ -151,15 +151,6 @@ Os resultados valem para a matriz e o ambiente testados. A análise detalhada ex
 - [Metodologia, tempos e análise](results/desempenho.md).
 - [Registro das dez repetições](results/desempenho.txt).
 
-## Limitações atuais
-
-- Os valores lidos ainda não são rejeitados quando diferem de 0 e 1; devem ser fornecidas matrizes binárias válidas.
-- A conversão do argumento de threads usa `atoi`, sem validação completa.
-- Não há proteção completa contra overflow nos produtos usados para dimensões, índices e rótulos.
-- O Union-Find reserva espaço proporcional ao número de threads multiplicado pelo número de células, podendo consumir muita memória.
-- A pilha é alocada novamente para cada componente.
-- A validação apresentada cobre os testes registrados; não comprova todas as entradas possíveis.
-
 ## Referências e ferramentas
 
 - Enunciado: *Contagem paralela de objetos em uma matriz binária*, Sistemas Operacionais — PUCRS, 2026/II, Prof. Filipo Mór.
