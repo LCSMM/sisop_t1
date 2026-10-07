@@ -4,6 +4,11 @@ Trabalho de Sistemas Operacionais — 2026/II, PUCRS.
 
 O projeto implementa duas versões em ANSI C (C89/C90) para contar objetos em uma matriz binária: uma sequencial e uma paralela com threads POSIX (Pthreads). Um objeto é um conjunto de células de valor 1 conectadas horizontalmente, verticalmente ou diagonalmente (conectividade 8). Células de valor 0 representam o fundo.
 
+## Links do trabalho
+
+- [Vídeo de apresentação](https://youtu.be/SAzNxhFOLBE)
+- [Repositório no GitHub](https://github.com/LCSMM/sisop_t1)
+
 ## Autores
 
 - Gabriella Luisa Schmidt
@@ -165,4 +170,4 @@ Os resultados valem para a matriz e o ambiente testados. A análise detalhada ex
 ## Pendências antes da entrega
 
 - Revisar as limitações técnicas descritas acima.
-- Publicar os materiais em repositório público no GitHub e entregar o endereço pelo Moodle, conforme orientação da disciplina.
+- Entregar o endereço do repositório pelo Moodle, conforme orientação da disciplina.
