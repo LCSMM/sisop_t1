@@ -32,7 +32,7 @@ results/
     desempenho.txt
 ```
 
-Os arquivos `.bak` em `src/` são cópias locais anteriores à correção do cronômetro; não são necessários à compilação. Os executáveis `sequencial` e `paralelo` são gerados pelo compilador e devem ser recompilados no ambiente de execução.
+Os executáveis `sequencial` e `paralelo` são gerados pelo compilador e devem ser recompilados no ambiente de execução.
 
 ## Requisitos e compilação
 
@@ -51,7 +51,7 @@ Na pasta que contém o Makefile:
 make -B
 ```
 
-O argumento `-B` força a recompilação. O Makefile atual não declara os fontes como dependências dos executáveis, portanto esse comando deve ser usado depois de alterar os arquivos C.
+Use `make -B` para recompilar os executáveis a partir dos fontes.
 
 A compilação usa `-std=c89 -Wall -Wextra -pedantic`, acrescentando `-pthread` na versão paralela. Para remover apenas os executáveis gerados:
 
@@ -146,7 +146,7 @@ Na matriz de 2000 × 2000, foram realizadas dez medições por configuração. T
 | 2 threads | 0,288983 | 1,061× |
 | 4 threads | 0,237126 | 1,293× |
 
-Os resultados valem para a matriz e o ambiente testados. A análise detalhada explica a sobrecarga e as limitações do experimento.
+Os resultados valem para a matriz e o ambiente testados. A análise detalhada apresenta a metodologia e a interpretação dos resultados.
 
 - [Metodologia, tempos e análise](results/desempenho.md).
 - [Registro das dez repetições](results/desempenho.txt).
